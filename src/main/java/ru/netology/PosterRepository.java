@@ -1,6 +1,6 @@
 package ru.netology;
 
-public class PosterManager {
+public class PosterRepository {
     /*
     findAll - возвращает массив всех хранящихся в массиве объектов
     save - добавляет объект в массив
@@ -8,40 +8,17 @@ public class PosterManager {
     removeById - удаляет объект по идентификатору (если объекта нет, то пусть будет исключение, как на лекции)
     removeAll* - полностью вычищает репозиторий (для удаления всех элементов достаточно в поле items положить пустой массив)
      */
-    private PosterRepository poster;
 
-    public PosterManager(PosterRepository poster) {
-        this.poster = poster;
-    }
-
-    public void addItem(FilmTile film) {
-        this.poster.save(film);
-    }
-
-    public void removeAllItems() {
-        this.poster.removeAll();
-    }
-
-    public void removeExcactlyOneFilm(int id) {
-        this.poster.removeById(id);
-    }
-
-    public FilmTile findOneFilm(int id) {
-        return this.poster.findById(id);
-    }
-
-
-        /*
     private int filmShowLimit;
     private FilmTile[] tiles = new FilmTile[0];
 
     //Простой конструктор с значением лимита выдачи по-умолчанию
-    public PosterManager() {
+    public PosterRepository() {
         filmShowLimit = 10;
     }
 
     //Конструктор с выставлением требуемого лимит выдачи
-    public PosterManager(int filmShowLimit) {
+    public PosterRepository(int filmShowLimit) {
         if (filmShowLimit >= 1) {
             this.filmShowLimit = filmShowLimit;
         } else {
@@ -57,7 +34,7 @@ public class PosterManager {
         this.filmShowLimit = filmShowLimit;
     }
 
-    public void addTile(FilmTile item) {
+    public void save(FilmTile item) {
         int length = tiles.length + 1;
         FilmTile[] tmp = new FilmTile[length];
         for (int i = 0; i < length - 1; i++) {
@@ -68,9 +45,53 @@ public class PosterManager {
         tiles = tmp;
     }
 
-    public FilmTile[] showTiles() {
+    public FilmTile[] findAll() {
         return tiles;
     }
+
+    public FilmTile findById(int id) {
+        for (int i = 0; i < (tiles.length - 1); i++) {
+            if (id == tiles[i].getTileId()) {
+                return tiles[i];
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public FilmTile[] removeById(int id) {
+        int length;
+        int p = 0;
+        length = tiles.length;
+        for (int i = 0; i < (tiles.length - 1); i++) {
+            if (id == tiles[i].getTileId()) {
+                length = tiles.length - 1;
+            } else {
+                return null;
+            }
+        }
+
+        FilmTile[] tmp = new FilmTile[length];
+
+        for (int i = 0; i < length - 1; i++) {
+            if (id != tiles[i].getTileId()) {
+                tmp[p] = tiles[i];
+                p++;
+            }
+        }
+        tiles = tmp;
+        //     int length = tiles.length + 1;
+        return tiles;
+        ////
+    }
+
+    public FilmTile[] removeAll() {
+        FilmTile[] tmp = new FilmTile[0];
+        tiles = tmp;
+        return tiles;
+    }
+
 
     public FilmTile[] showSomeTiles() {
 
@@ -88,6 +109,4 @@ public class PosterManager {
         return tiles;
     }
 
-
-     */
 }

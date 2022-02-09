@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PosterManagerTest {
-
+/*
     // Тест конструктора
     // Тест установки дефолтного значения максимального количества выводимых фильмов
     @Test
@@ -97,4 +97,6 @@ class PosterManagerTest {
         FilmTile[] excpected = {tres, duo, uno};
         assertArrayEquals(excpected, actual);
     }
+
+ */
 }
