@@ -9,6 +9,7 @@ public class PosterRepository {
     public PosterRepository() {
         filmShowLimit = 10;
     }
+
     //Конструктор с выставлением требуемого лимит выдачи
     public PosterRepository(int filmShowLimit) {
         if (filmShowLimit >= 1) {
@@ -18,13 +19,14 @@ public class PosterRepository {
         }
     }
 
+    public void setFilmShowLimit(int filmShowLimit) {
+        this.filmShowLimit = filmShowLimit;
+    }
+
     public int getFilmShowLimit() {
         return this.filmShowLimit;
     }
 
-    public void setFilmShowLimit(int filmShowLimit) {
-        this.filmShowLimit = filmShowLimit;
-    }
 
     public void save(FilmTile item) {
         int length = tiles.length + 1;
@@ -77,23 +79,6 @@ public class PosterRepository {
 
     public FilmTile[] removeAll() {
         FilmTile[] tmp = new FilmTile[0];
-        tiles = tmp;
-        return tiles;
-    }
-
-
-    public FilmTile[] showSomeTiles() {
-
-   //     int length = tiles.length - 1;
-        int p = 0;
-        if ((tiles.length - filmShowLimit) <= 0) {
-            filmShowLimit = tiles.length;
-        }
-        FilmTile[] tmp = new FilmTile[filmShowLimit];
-        for (int i = (tiles.length - 1); i >= ((tiles.length - filmShowLimit)); i--) {
-            tmp[p] = tiles[i];
-            p++;
-        }
         tiles = tmp;
         return tiles;
     }

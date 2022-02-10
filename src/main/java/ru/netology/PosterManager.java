@@ -5,31 +5,43 @@ public class PosterManager {
 
     public PosterManager(PosterRepository poster) {
         this.poster = poster;
+
     }
 
     //save
     public void addItem(FilmTile film) {
-        this.poster.save(film);
+        poster.save(film);
     }
 
     //removeAll
     public void removeAllItems() {
-        this.poster.removeAll();
+        poster.removeAll();
     }
 
     //removeById
     public void removeExcactlyOneFilm(int id) {
-        this.poster.removeById(id);
+        poster.removeById(id);
     }
 
     //findById
     public FilmTile findOneFilm(int id) {
-        return this.poster.findById(id);
+        return poster.findById(id);
     }
 
     //findAll
-    public FilmTile[] everyThing() {
-        return this.poster.findAll();
+    public FilmTile[] showEveryThing() {
+        return poster.findAll();
     }
 
+    public FilmTile[] showSomeThing() {
+        FilmTile[] tiles = poster.findAll();
+        int p = 0;
+        FilmTile[] tmp = new FilmTile[poster.getFilmShowLimit()];
+        for (int i = (tiles.length - 1); i >= ((tiles.length - poster.getFilmShowLimit())); i--) {
+            tmp[p] = tiles[i];
+            p++;
+        }
+        tiles = tmp;
+        return tiles;
+    }
 }
