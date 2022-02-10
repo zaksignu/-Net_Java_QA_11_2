@@ -1,13 +1,6 @@
 package ru.netology;
 
 public class PosterRepository {
-    /*
-    findAll - возвращает массив всех хранящихся в массиве объектов
-    save - добавляет объект в массив
-    findById - возвращает объект по идентификатору (либо null, если такого объекта нет)
-    removeById - удаляет объект по идентификатору (если объекта нет, то пусть будет исключение, как на лекции)
-    removeAll* - полностью вычищает репозиторий (для удаления всех элементов достаточно в поле items положить пустой массив)
-     */
 
     private int filmShowLimit;
     private FilmTile[] tiles = new FilmTile[0];
@@ -16,7 +9,6 @@ public class PosterRepository {
     public PosterRepository() {
         filmShowLimit = 10;
     }
-
     //Конструктор с выставлением требуемого лимит выдачи
     public PosterRepository(int filmShowLimit) {
         if (filmShowLimit >= 1) {
@@ -50,11 +42,9 @@ public class PosterRepository {
     }
 
     public FilmTile findById(int id) {
-        for (int i = 0; i < (tiles.length - 1); i++) {
+        for (int i = 0; i <= (tiles.length - 1); i++) {
             if (id == tiles[i].getTileId()) {
                 return tiles[i];
-            } else {
-                return null;
             }
         }
         return null;
@@ -64,7 +54,8 @@ public class PosterRepository {
         int length;
         int p = 0;
         length = tiles.length;
-        for (int i = 0; i < (tiles.length - 1); i++) {
+        //Проверяем, есть ли вообще id в контейнере tiles
+        for (int i = 0; i <= (tiles.length - 1); i++) {
             if (id == tiles[i].getTileId()) {
                 length = tiles.length - 1;
             } else {
@@ -81,9 +72,7 @@ public class PosterRepository {
             }
         }
         tiles = tmp;
-        //     int length = tiles.length + 1;
         return tiles;
-        ////
     }
 
     public FilmTile[] removeAll() {
@@ -95,7 +84,7 @@ public class PosterRepository {
 
     public FilmTile[] showSomeTiles() {
 
-        int length = tiles.length - 1;
+   //     int length = tiles.length - 1;
         int p = 0;
         if ((tiles.length - filmShowLimit) <= 0) {
             filmShowLimit = tiles.length;
