@@ -1,60 +1,47 @@
 package ru.netology;
 
 public class PosterManager {
-    private int filmShowLimit;
-    private FilmTile[] tiles = new FilmTile[0];
+    private PosterRepository poster;
 
-    //Простой конструктор с значением лимита выдачи по-умолчанию
-    public PosterManager() {
-        filmShowLimit = 10;
+    public PosterManager(PosterRepository poster) {
+        this.poster = poster;
+
     }
 
-    //Конструктор с выставлением требуемого лимит выдачи
-    public PosterManager(int filmShowLimit) {
-        if (filmShowLimit >= 1) {
-            this.filmShowLimit = filmShowLimit;
-        } else {
-            this.filmShowLimit = 10;
-        }
+    //save
+    public void addItem(FilmTile film) {
+        poster.save(film);
     }
 
-    public int getFilmShowLimit() {
-        return this.filmShowLimit;
+    //removeAll
+    public void removeAllItems() {
+        poster.removeAll();
     }
 
-    public void setFilmShowLimit(int filmShowLimit) {
-        this.filmShowLimit = filmShowLimit;
+    //removeById
+    public void removeExcactlyOneFilm(int id) {
+        poster.removeById(id);
     }
 
-    public void addTile(FilmTile item) {
-        int length = tiles.length + 1;
-        FilmTile[] tmp = new FilmTile[length];
-        for (int i = 0; i < length - 1; i++) {
-            tmp[i] = tiles[i];
-        }
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
-        tiles = tmp;
+    //findById
+    public FilmTile findOneFilm(int id) {
+        return poster.findById(id);
     }
 
-    public FilmTile[] showTiles() {
-        return tiles;
+    //findAll
+    public FilmTile[] showEveryThing() {
+        return poster.findAll();
     }
 
-    public FilmTile[] showSomeTiles() {
-
-        int length = tiles.length - 1;
+    public FilmTile[] showSomeThing() {
+        FilmTile[] tiles = poster.findAll();
         int p = 0;
-        if ((tiles.length - filmShowLimit) <= 0) {
-            filmShowLimit = tiles.length;
-        }
-        FilmTile[] tmp = new FilmTile[filmShowLimit];
-        for (int i = (tiles.length - 1); i >= ((tiles.length - filmShowLimit)); i--) {
+        FilmTile[] tmp = new FilmTile[poster.getFilmShowLimit()];
+        for (int i = (tiles.length - 1); i >= ((tiles.length - poster.getFilmShowLimit())); i--) {
             tmp[p] = tiles[i];
             p++;
         }
         tiles = tmp;
         return tiles;
     }
-
 }
