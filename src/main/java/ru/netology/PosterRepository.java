@@ -56,6 +56,14 @@ public class PosterRepository {
         int length;
         int p = 0;
         length = tiles.length;
+        //Проверяем, есть ли вообще id в контейнере tiles
+        for (int i = 0; i <= (tiles.length - 1); i++) {
+            if (id == tiles[i].getTileId()) {
+                length = tiles.length - 1;
+            } else {
+                return null;
+            }
+        }
         FilmTile[] tmp = new FilmTile[length];
 
         for (int i = 0; i < length - 1; i++) {
